@@ -29,4 +29,8 @@ This repo is more of a learning tool than a release-ready game
 - [ ] Make a main menu
 	- [ ] Allow selecting the game from the main menu
 	- [ ] Add a `Go back` button in the game to go back to the menu
+- [ ] Saving
+    - [ ] Save the progress on disk
+    - [ ] Load the progress when loading the game
+    - [ ] Allow the user to clear their save
 - [ ] Add other games or features

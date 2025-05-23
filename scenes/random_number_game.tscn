@@ -14,34 +14,26 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_awpsa")
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 0.531
-anchor_bottom = 0.244
-offset_top = 68.0
-offset_right = 0.287964
-offset_bottom = -0.112015
-theme_override_font_sizes/font_size = 65
-text = "Guess the number: "
-vertical_alignment = 1
-
-[node name="RandomNumber" type="Label" parent="Label"]
+[node name="RandomNumber" type="Label" parent="."]
 unique_name_in_owner = true
 layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 7.0
-offset_top = -45.0
-offset_right = 540.0
-offset_bottom = 45.0
-grow_horizontal = 0
-grow_vertical = 2
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 1123.0
+offset_bottom = 140.0
 theme_override_font_sizes/font_size = 65
-text = "0"
+text = "Guess the number: 0"
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 50.0
+offset_top = 150.0
+offset_right = 1116.0
+offset_bottom = 240.0
+theme_override_font_sizes/font_size = 65
+text = "Score: 0"
 vertical_alignment = 1
 
 [node name="UserInput" type="Control" parent="."]
