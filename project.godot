@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Mini Games"
+config/name="Mini-Games"
 run/main_scene="uid://bhcb6vtumovru"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
