@@ -28,84 +28,104 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 15
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="GameViewVBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 25
+
+[node name="GameViewVBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 25
 
-[node name="RandomNumberHBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer"]
+[node name="RandomNumberHBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/GameViewVBoxContainer"]
 layout_mode = 2
 
-[node name="RandomNumberLabel" type="Label" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer/RandomNumberHBoxContainer"]
+[node name="RandomNumberLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/GameViewVBoxContainer/RandomNumberHBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 65
 text = "Guess the number: "
 vertical_alignment = 1
 
-[node name="RandomNumber" type="Label" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer/RandomNumberHBoxContainer"]
+[node name="RandomNumber" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/GameViewVBoxContainer/RandomNumberHBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 65
 text = "0"
 vertical_alignment = 1
 
-[node name="ScoreHBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer"]
+[node name="ScoreHBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/GameViewVBoxContainer"]
 layout_mode = 2
 
-[node name="ScoreLabel" type="Label" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer/ScoreHBoxContainer"]
+[node name="ScoreLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/GameViewVBoxContainer/ScoreHBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 65
 text = "Score: "
 vertical_alignment = 1
 
-[node name="Score" type="Label" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer/ScoreHBoxContainer"]
+[node name="Score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/GameViewVBoxContainer/ScoreHBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 65
 text = "0"
 vertical_alignment = 1
 
-[node name="TriesHBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer"]
+[node name="TriesHBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/GameViewVBoxContainer"]
 layout_mode = 2
 
-[node name="TriesLabel" type="Label" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer/TriesHBoxContainer"]
+[node name="TriesLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/GameViewVBoxContainer/TriesHBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 65
 text = "Tries: "
 vertical_alignment = 1
 
-[node name="Tries" type="Label" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer/TriesHBoxContainer"]
+[node name="Tries" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/GameViewVBoxContainer/TriesHBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 65
 text = "0"
 vertical_alignment = 1
 
-[node name="InputHBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer"]
+[node name="InputHBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/GameViewVBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="SpinBox" type="SpinBox" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer/InputHBoxContainer"]
+[node name="SpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer/GameViewVBoxContainer/InputHBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = SubResource("Theme_awpsa")
 update_on_text_changed = true
 
-[node name="SubmitButton" type="Button" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer/InputHBoxContainer"]
+[node name="SubmitButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/GameViewVBoxContainer/InputHBoxContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "Submit"
 
-[node name="HintsVBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+[node name="HintsVBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 20
 script = ExtResource("2_0e3ri")
 label_scene = ExtResource("3_whcal")
 
-[connection signal="pressed" from="MarginContainer/HBoxContainer/GameViewVBoxContainer/InputHBoxContainer/SubmitButton" to="." method="_on_submit_button_pressed"]
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+rounded = true
+show_percentage = false
+
+[node name="NextRoundTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 2.0
+one_shot = true
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/GameViewVBoxContainer/InputHBoxContainer/SubmitButton" to="." method="_on_submit_button_pressed"]
+[connection signal="timeout" from="NextRoundTimer" to="." method="_on_next_round_timer_timeout"]
