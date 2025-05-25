@@ -15,6 +15,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_awpsa")
+sfx_right_answer = "uid://di557uqokgp1u"
+sfx_wrong_answer = "uid://pevsyul187jl"
+sfx_round_lost = "uid://b1w1r2cy74s17"
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -52,6 +55,7 @@ vertical_alignment = 1
 
 [node name="RandomNumber" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/GameViewVBoxContainer/RandomNumberHBoxContainer"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 65
 text = "0"
@@ -126,6 +130,9 @@ show_percentage = false
 unique_name_in_owner = true
 wait_time = 2.0
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/GameViewVBoxContainer/InputHBoxContainer/SubmitButton" to="." method="_on_submit_button_pressed"]
 [connection signal="timeout" from="NextRoundTimer" to="." method="_on_next_round_timer_timeout"]

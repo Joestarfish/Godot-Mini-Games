@@ -4,11 +4,15 @@ const MIN_NUMBER := 1
 const MAX_NUMBER := 100
 
 @export var max_tries := 3
+@export_file("*.ogg", "*.wav") var sfx_right_answer
+@export_file("*.ogg", "*.wav") var sfx_wrong_answer
+@export_file("*.ogg", "*.wav") var sfx_round_lost
 
 var random_number: int:
 	set(value):
 		random_number = min(MAX_NUMBER, max(MIN_NUMBER, value))
-		number_label.text = str(random_number)
+		number_label.text = "?"
+		print("Random number is %d" % random_number)
 var score := 0:
 	set(value):
 		score = value
@@ -26,6 +30,7 @@ var tries: int:
 @onready var next_round_timer: Timer = %NextRoundTimer
 @onready var progress_bar: ProgressBar = %ProgressBar
 @onready var submit_button: Button = %SubmitButton
+@onready var audio_stream_player: AudioStreamPlayer = %AudioStreamPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -41,6 +46,7 @@ func _process(delta: float) -> void:
 
 # This function wait for a timer to end before starting the next round. It allows the user to view the answer before we clear it.
 func queue_next_round() -> void:
+	number_label.text = str(random_number)
 	next_round_timer.start()
 	progress_bar.visible = true
 	submit_button.disabled = true
@@ -55,6 +61,23 @@ func start_next_round() -> void:
 	tries = max_tries
 	random_number = randi_range(MIN_NUMBER, MAX_NUMBER)
 
+func handle_right_answer() -> void:
+	score += 1
+	hints_v_box_container.add_hint("The answer was %d\nGood job!" % random_number)
+	audio_stream_player.stream = load(sfx_right_answer)
+	audio_stream_player.play()
+	queue_next_round()
+
+func handle_wrong_answer(given_answer: int) -> void:
+	hints_v_box_container.add_hint("%s than %d" % ["Lower" if random_number - given_answer < 0 else "Higher", given_answer])
+	audio_stream_player.stream = load(sfx_wrong_answer)
+	audio_stream_player.play()
+
+func handle_round_lost() -> void:
+	hints_v_box_container.add_hint("The answer was %d" % random_number)
+	audio_stream_player.stream = load(sfx_round_lost)
+	audio_stream_player.play()
+	queue_next_round()
 
 func _on_submit_button_pressed() -> void:
 	var input = int(spin_box.value)
@@ -64,18 +87,15 @@ func _on_submit_button_pressed() -> void:
 		return
 	
 	if input == random_number:
-		score += 1
-		hints_v_box_container.add_hint("The answer was %d\nGood job!" % random_number)
-		queue_next_round()
+		handle_right_answer()
 		return
 
 	tries -= 1
 	if tries <= 0:
-		hints_v_box_container.add_hint("The answer was %d" % random_number)
-		queue_next_round()
+		handle_round_lost()
 		return
 
-	hints_v_box_container.add_hint("%s than %d" % ["Lower" if random_number - input < 0 else "Higher", input])
+	handle_wrong_answer(input)
 
 
 func _on_next_round_timer_timeout() -> void:

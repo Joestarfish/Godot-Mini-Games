@@ -7,7 +7,7 @@ The Godot project currently consist of a simple number guessing mini-game just t
 This repo is more of a learning tool than a release-ready game
 
 ## TODO:
-- [ ] Number Guessing game
+- [x] Number Guessing game
 	- [x] Make a simple interface:
 		- [x] Text containing a number
 		- [x] Input to enter the number
@@ -18,9 +18,9 @@ This repo is more of a learning tool than a release-ready game
 		- [x] Compare the input to the generated number
 		- [x] If the number is right, increment a `score` variable
 	- [ ] Make the game fun
-		- [ ] Add some sort of effect (animation and sound) when the answer is right
-		- [ ] Add other effects when the answer is wrong
-		- [ ] Make the random number invisible to the player until they validate their answer
+		- [x] Add some sort of effect (animation and sound) when the answer is right
+		- [x] Add other effects when the answer is wrong
+		- [x] Make the random number invisible to the player until they validate their answer
 		- [x] Allow multiple tries
 			- [x] Store the current remaining tries in a variable
 			- [x] Show the remaining tries on screen
@@ -34,3 +34,6 @@ This repo is more of a learning tool than a release-ready game
     - [ ] Load the progress when loading the game
     - [ ] Allow the user to clear their save
 - [ ] Add other games or features
+
+## Resources
+[Interface SFX Pack 1](https://obsydianx.itch.io/interface-sfx-pack-1)
