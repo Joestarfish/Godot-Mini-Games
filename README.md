@@ -17,7 +17,7 @@ This repo is more of a learning tool than a release-ready game
 	- [x] Input validation
 		- [x] Compare the input to the generated number
 		- [x] If the number is right, increment a `score` variable
-	- [ ] Make the game fun
+	- [x] Make the game fun
 		- [x] Add some sort of effect (animation and sound) when the answer is right
 		- [x] Add other effects when the answer is wrong
 		- [x] Make the random number invisible to the player until they validate their answer
@@ -27,8 +27,10 @@ This repo is more of a learning tool than a release-ready game
 			- [x] When the answer is wrong, decrement this variable and update it on screen
 			- [x] Make the player lose when they are out of attempts
 - [ ] Make a main menu
-	- [ ] Allow selecting the game from the main menu
-	- [ ] Add a `Go back` button in the game to go back to the menu
+	- [x] Allow selecting the game from the main menu
+	- [x] Add a `Go back` button in the game to go back to the menu
+    - [ ] Add a title
+    - [ ] Play a sound when going in and out of a game
 - [ ] Saving
     - [ ] Save the progress on disk
     - [ ] Load the progress when loading the game
@@ -37,3 +39,4 @@ This repo is more of a learning tool than a release-ready game
 
 ## Resources
 [Interface SFX Pack 1](https://obsydianx.itch.io/interface-sfx-pack-1)
+[Yet Another Icons](https://prinbles.itch.io/yet-another-icons)

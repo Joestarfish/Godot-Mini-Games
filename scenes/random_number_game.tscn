@@ -1,11 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://bhcb6vtumovru"]
+[gd_scene load_steps=7 format=3 uid="uid://bhcb6vtumovru"]
 
 [ext_resource type="Script" uid="uid://r25vcinn6p0x" path="res://scripts/random_number_game.gd" id="1_awpsa"]
 [ext_resource type="Script" uid="uid://dbm7t1i6u4koq" path="res://scripts/hints_v_box_container.gd" id="2_0e3ri"]
+[ext_resource type="Texture2D" uid="uid://1408jkb8kp8r" path="res://assets/icons/Home.png" id="2_bo04u"]
 [ext_resource type="PackedScene" uid="uid://7qwlhbdk8qf6" path="res://scenes/hint_label.tscn" id="3_whcal"]
 
 [sub_resource type="Theme" id="Theme_awpsa"]
 default_font_size = 60
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bo04u"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -15,6 +18,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_awpsa")
+main_menu_scene = "uid://bi4alb3upy7ua"
 sfx_right_answer = "uid://di557uqokgp1u"
 sfx_wrong_answer = "uid://pevsyul187jl"
 sfx_round_lost = "uid://b1w1r2cy74s17"
@@ -110,11 +114,28 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "Submit"
 
-[node name="HintsVBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HomeButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 0.686275)
+theme_override_colors/icon_hover_color = Color(1, 1, 1, 0.854902)
+theme_override_colors/icon_pressed_color = Color(1, 1, 1, 0.686275)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bo04u")
+icon = ExtResource("2_bo04u")
+flat = true
+alignment = 2
+icon_alignment = 1
+
+[node name="HintsVBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 theme_override_constants/separation = 20
 script = ExtResource("2_0e3ri")
 label_scene = ExtResource("3_whcal")
@@ -135,4 +156,5 @@ one_shot = true
 unique_name_in_owner = true
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/GameViewVBoxContainer/InputHBoxContainer/SubmitButton" to="." method="_on_submit_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HomeButton" to="." method="_on_home_button_pressed"]
 [connection signal="timeout" from="NextRoundTimer" to="." method="_on_next_round_timer_timeout"]

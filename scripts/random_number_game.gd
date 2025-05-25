@@ -4,6 +4,7 @@ const MIN_NUMBER := 1
 const MAX_NUMBER := 100
 
 @export var max_tries := 3
+@export_file("*.tscn") var main_menu_scene
 @export_file("*.ogg", "*.wav") var sfx_right_answer
 @export_file("*.ogg", "*.wav") var sfx_wrong_answer
 @export_file("*.ogg", "*.wav") var sfx_round_lost
@@ -100,3 +101,6 @@ func _on_submit_button_pressed() -> void:
 
 func _on_next_round_timer_timeout() -> void:
 	start_next_round()
+
+func _on_home_button_pressed() -> void:
+	get_tree().change_scene_to_file(main_menu_scene)
