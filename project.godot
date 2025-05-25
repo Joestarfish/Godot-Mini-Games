@@ -14,3 +14,7 @@ config/name="Mini-Games"
 run/main_scene="uid://bhcb6vtumovru"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="canvas_items"

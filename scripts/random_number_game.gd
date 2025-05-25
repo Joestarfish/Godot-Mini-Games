@@ -3,18 +3,18 @@ extends Control
 var random_number: int:
 	set(value):
 		random_number = value
-		number_label.text = 'Guess the number: %d' % random_number
+		number_label.text = str(random_number)
 var score: int = 0:
 	set(value):
 		score = value
-		score_label.text = 'Score: %d' % score
+		score_label.text = str(score)
 
 var min_number: int = 1
 var max_number: int = 100
 
 @onready var number_label: Label = %RandomNumber
 @onready var spin_box: SpinBox = %SpinBox
-@onready var score_label: Label = %ScoreLabel
+@onready var score_label: Label = %Score
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
