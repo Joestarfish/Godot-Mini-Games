@@ -21,11 +21,11 @@ This repo is more of a learning tool than a release-ready game
 		- [ ] Add some sort of effect (animation and sound) when the answer is right
 		- [ ] Add other effects when the answer is wrong
 		- [ ] Make the random number invisible to the player until they validate their answer
-		- [ ] Allow multiple tries
-			- [ ] Store the current remaining tries in a variable
-			- [ ] Show the remaining tries on screen
-			- [ ] When the answer is wrong, decrement this variable and update it on screen
-			- [ ] Make the player lose when they are out of attempts
+		- [x] Allow multiple tries
+			- [x] Store the current remaining tries in a variable
+			- [x] Show the remaining tries on screen
+			- [x] When the answer is wrong, decrement this variable and update it on screen
+			- [x] Make the player lose when they are out of attempts
 - [ ] Make a main menu
 	- [ ] Allow selecting the game from the main menu
 	- [ ] Add a `Go back` button in the game to go back to the menu

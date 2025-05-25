@@ -1,30 +1,43 @@
 extends Control
 
+const MIN_NUMBER := 1
+const MAX_NUMBER := 100
+
+@export var max_tries := 3
+
 var random_number: int:
 	set(value):
-		random_number = value
+		random_number = min(MAX_NUMBER, max(MIN_NUMBER, value))
 		number_label.text = str(random_number)
-var score: int = 0:
+var score := 0:
 	set(value):
 		score = value
 		score_label.text = str(score)
-
-var min_number: int = 1
-var max_number: int = 100
+var tries: int:
+	set(value):
+		tries = min(max_tries, max(0, value))
+		tries_label.text = str(tries)
 
 @onready var number_label: Label = %RandomNumber
-@onready var spin_box: SpinBox = %SpinBox
 @onready var score_label: Label = %Score
+@onready var tries_label: Label = %Tries
+@onready var spin_box: SpinBox = %SpinBox
+@onready var hints_v_box_container := %HintsVBoxContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	score = 0
+
+	# Change the max values of the spin box here to make sure it still works if either the variables OR the spinbox min/max were changed in the editor
+	spin_box.min_value = MIN_NUMBER - 1
+	spin_box.max_value = MAX_NUMBER
 	start_next_round()
 
-
 func start_next_round() -> void:
+	hints_v_box_container.clear_nodes()
 	spin_box.value = 0
-	random_number = randi_range(min_number, max_number)
+	tries = max_tries
+	random_number = randi_range(MIN_NUMBER, MAX_NUMBER)
 
 
 func _on_submit_button_pressed() -> void:
@@ -35,5 +48,12 @@ func _on_submit_button_pressed() -> void:
 	
 	if input == random_number:
 		score += 1
+		start_next_round()
+		return
 
-	start_next_round()
+	tries -= 1
+	if tries <= 0:
+		start_next_round()
+		return
+
+	hints_v_box_container.add_hint("%s than %d" % ["Lower" if random_number - input < 0 else "Higher", input])

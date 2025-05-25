@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bhcb6vtumovru"]
+[gd_scene load_steps=5 format=3 uid="uid://bhcb6vtumovru"]
 
 [ext_resource type="Script" uid="uid://r25vcinn6p0x" path="res://scripts/random_number_game.gd" id="1_awpsa"]
+[ext_resource type="Script" uid="uid://dbm7t1i6u4koq" path="res://scripts/hints_v_box_container.gd" id="2_0e3ri"]
+[ext_resource type="PackedScene" uid="uid://7qwlhbdk8qf6" path="res://scenes/hint_label.tscn" id="3_whcal"]
 
 [sub_resource type="Theme" id="Theme_awpsa"]
 default_font_size = 60
@@ -26,56 +28,84 @@ theme_override_constants/margin_top = 15
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+
+[node name="GameViewVBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 25
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="RandomNumberHBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer"]
 layout_mode = 2
 
-[node name="RandomNumberLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="RandomNumberLabel" type="Label" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer/RandomNumberHBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 65
 text = "Guess the number: "
 vertical_alignment = 1
 
-[node name="RandomNumber" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="RandomNumber" type="Label" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer/RandomNumberHBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 65
 text = "0"
 vertical_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="ScoreHBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer"]
 layout_mode = 2
 
-[node name="ScoreLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="ScoreLabel" type="Label" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer/ScoreHBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 65
 text = "Score: "
 vertical_alignment = 1
 
-[node name="Score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+[node name="Score" type="Label" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer/ScoreHBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 65
 text = "0"
 vertical_alignment = 1
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="TriesHBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer"]
+layout_mode = 2
+
+[node name="TriesLabel" type="Label" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer/TriesHBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 65
+text = "Tries: "
+vertical_alignment = 1
+
+[node name="Tries" type="Label" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer/TriesHBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_font_sizes/font_size = 65
+text = "0"
+vertical_alignment = 1
+
+[node name="InputHBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 50
 
-[node name="SpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+[node name="SpinBox" type="SpinBox" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer/InputHBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = SubResource("Theme_awpsa")
 update_on_text_changed = true
 
-[node name="SubmitButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
+[node name="SubmitButton" type="Button" parent="MarginContainer/HBoxContainer/GameViewVBoxContainer/InputHBoxContainer"]
 custom_minimum_size = Vector2(350, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "Submit"
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer3/SubmitButton" to="." method="_on_submit_button_pressed"]
+[node name="HintsVBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+script = ExtResource("2_0e3ri")
+label_scene = ExtResource("3_whcal")
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/GameViewVBoxContainer/InputHBoxContainer/SubmitButton" to="." method="_on_submit_button_pressed"]
